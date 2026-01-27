@@ -1,7 +1,7 @@
 interface IUser {
     name: string;
     age: number;
-    firstName: string;
+    lastName: string;
     email?: string; 
 }
 
@@ -49,13 +49,13 @@ const users: IUser[] = [
   {
     name: 'Nakir',
     age: 20,
-    firstName: 'Nakirovich'
+    lastName: 'Nakirovich'
   },
   {
     name: 'Vlad',
     age: 23,
-    firstName: 'Anatolevich'
+    lastName: 'Anatolevich'
   }
 ];
 
-const filterUsers: IUser[] = users.filter(user => user.firstName === 'Nakirovich');
+const filterUsers: IUser[] = users.filter((user: IUser) => user.lastName === 'Nakirovich');
