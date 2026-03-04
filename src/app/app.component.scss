@@ -1,0 +1,140 @@
+@use '../assets/mixins' as mix;
+
+.header {
+    background: url('../../public/images/bg-mountain.png') no-repeat center / cover;
+    min-height: 100vh;
+    height: 985px;
+    display: flex;
+    flex-direction: column;
+    color: var(--primary-color);
+
+    &__top-wrapper {
+        width: 100%;
+        height: 120px;
+        background-color:#18121E80;
+        display: flex;
+        align-items: center;
+    }
+
+    &__container {
+        max-width: 1180px;
+        width: 100%;
+        padding: 0 20px;
+        margin: 0 auto;
+
+    }
+
+    &__container--bottom {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+    }
+
+    &__top {
+        @include mix.flex(space-between, center);
+        height: 72px;
+    }
+
+    &__logo {
+        display: flex;
+        flex-direction: column;
+        color: var(--primary-color);
+        text-decoration: none;
+
+        .header__company-name {
+            margin-top: 17px;
+            text-transform: uppercase;
+            font-weight: 700;
+            letter-spacing: 7px;
+        }
+    }
+
+    &__nav {
+        display: flex;
+        gap: 24px;
+
+        &-link {
+            font-weight: 600;
+            font-size: 18px;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+    }
+
+    &__btn {
+        padding: 12px 24px;
+        border-radius: 4px;
+        background-color: var(--primary-color);
+        font-weight: 600;
+        font-size: 16px;
+        color: var(--additional-color);
+        border: none;
+        cursor: pointer;
+    }
+
+    &__bottom {
+        width: 100%;
+        margin-bottom: 82px;
+    }
+
+    &__title {
+        text-transform: uppercase;
+        font-size: 50px;
+        font-weight: 400;
+        line-height: 150%;
+        letter-spacing: 0.02em;
+        margin-bottom: 41px;
+    }
+
+    &__form {
+        @include mix.flex(space-between);
+        align-items: flex-start;
+        font-weight: 700;
+        min-height: 161px;
+        column-gap: 24px;
+        padding: 40px 42px;
+        backdrop-filter: blur(5px);
+        border-radius: 10px;
+        background-color: #FFFFFF33;
+    }
+
+    &__field {
+        width: 270px;
+
+        &-top {
+            @include mix.flex(space-between, center);
+            padding: 14px 16px;
+            border: 1px solid var(--primary-color);
+            border-radius: 10px;
+            cursor: pointer;
+        }
+    }
+
+    &__field-desc {
+        display: block;
+        padding: 8px 8px 0px;
+        font-weight: 400;
+    }
+
+    &__bottom-btn {
+        height: 52px;
+        width: 213px;
+        border-radius: 4px;
+        flex-shrink: 0;
+        background-color: var(--additional-color);
+        line-height: 50px;
+        text-align: center;
+        cursor: pointer;
+    }
+
+    &__bottom_btn-text {
+        font-weight: 700;
+        font-size: 16px;
+        line-height: 125%;
+        letter-spacing: 0.01em;
+        color: var(--primary-color);
+        background: none;
+        border: none;
+    }
+}
