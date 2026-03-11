@@ -32,8 +32,5 @@ export class Collection<T> {
 
 }
 
-export const nameCollection: Collection<string> =
-    new Collection<string>(['Emin', 'Anatoly', 'Nakirich']);
-
-export const numberCollection: Collection<number> =
-    new Collection<number>([1, 2, 3]);
+export const nameCollection: Collection<string> = new Collection<string>(['Emin', 'Anatoly', 'Nakirich']);
+export const numberCollection: Collection<number> = new Collection<number>([1, 2, 3]);
