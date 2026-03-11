@@ -1,0 +1,20 @@
+@use './fonts';
+@use './normalize';
+@use './mixins';
+
+* {
+    font-family: 'Nunito Sans';
+    box-sizing: border-box;
+}
+
+.container { 
+    max-width: 1180px;
+    padding: 0 20px;
+    margin: 0 auto;
+}
+
+:root {
+    --primary-color: #FDFDFD;
+    --secondary-color: #18121E;
+    --additional-color: #1A3E3E;
+}
