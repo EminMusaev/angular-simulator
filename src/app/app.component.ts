@@ -86,12 +86,12 @@ export class AppComponent {
 
   saveLastVisit(): void {
     const now: string = new Date().toString();
-    localStorage.setItem('lastVisitDate', now);
+    localStorage.setItem('last-visit-date', now);
   }
 
   updateVisitsCount(): void {
-    const storedValue: number = Number(localStorage.getItem('visitsCount') || 0);
-    localStorage.setItem('visitsCount', String(storedValue + 1));
+    const storedValue: number = Number(localStorage.getItem('visits-count') || 0);
+    localStorage.setItem('visits-count', String(storedValue + 1));
   }
 
 }
