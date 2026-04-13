@@ -29,6 +29,12 @@
         <div class="header__date">
           <span>{{ currentDate.toLocaleString() }}</span>
         </div>
+        <button 
+        class="header__toggle-btn" 
+        id="show-counter-btn" 
+        (click)="setHeaderWidget('counter')">
+          Показать кликер
+        </button>
         }
         @if (currentHeaderWidget === 'counter') {
         <div class="header__counter">
@@ -36,14 +42,10 @@
           <span>{{ count }}</span>
           <button id="increment-btn" (click)="incrementCount()" class="counter-btn">+</button>
         </div>
-        }
-        @if (currentHeaderWidget === 'date') {
-        <button class="header__toggle-btn" id="show-counter-btn" (click)="setHeaderWidget('counter')">
-          Показать кликер
-        </button>
-        }
-        @if (currentHeaderWidget === 'counter') {
-        <button class="header__toggle-btn" id="show-date-btn" (click)="setHeaderWidget('date')">
+        <button 
+        class="header__toggle-btn" 
+        id="show-date-btn" 
+        (click)="setHeaderWidget('date')">
           Показать дату
         </button>
         }
@@ -89,7 +91,8 @@
         </div>
         <div class="header__bottom-btn">
           <button
-            class="header__bottom_btn-text" id="search-program-btn"
+            class="header__bottom_btn-text" 
+            id="search-program-btn"
             [disabled]="!city || !date || !participants"
           >
             Найти программу
@@ -126,7 +129,9 @@
         <div class="program__tour-video-bg"></div>
         <div class="program__tour-video-overlay">
           <div class="program__tour-video-wrapper">
-            <button class="program__tour-play" id="play-tour-program"></button>
+            <button 
+            class="program__tour-play" 
+            id="play-tour-program"></button>
           </div>
         </div>
       </div>
