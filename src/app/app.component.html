@@ -1,55 +1,205 @@
-<header class="header">
-    <div class="header__top-wrapper">
-        <div class="container header__container">
-            <div class="header__top">
-                <a href="#" class="header__logo">
-                    <img src="/images/logo-icon.svg" alt="РумТибет" class="header__logo-img">
-                    <span class="header__company-name">{{ companyName }}</span>
-                </a>
-                <nav class="header__nav">
-                    <a href="#" class="header__nav-link header__nav-link--active">Главная</a>
-                    <a href="#" class="header__nav-link">Про гида</a>
-                    <a href="#" class="header__nav-link">Программа тура</a>
-                    <a href="#" class="header__nav-link">Стоимость</a>
-                    <a href="#" class="header__nav-link">Блог</a>
-                    <a href="#" class="header__nav-link">Контакты</a>
-                </nav>
-                <button class="header__btn">Консультация</button>
-            </div>
-        </div>
+@if (isLoading) {
+    <div class="loading">
+        Загрузка страницы...
+        <img class="loader-icon" src="/images/loader-icon.svg" alt="loader-icon">
     </div>
-    <div class="container header__container header__container--bottom">
-        <div class="header__bottom">
-            <h1 class="header__title">
-                Насладись прогулкой в горах<br>
-                с командой единомышленников
-            </h1>
-            <div class="header__form">
-                <div class="header__field">
-                    <div class="header__field-top">
-                        <span>Локация для тура</span>
-                        <img src="/images/arrow-icon.svg" alt="иконка стрелка">
-                    </div>
-                    <span class="header__field-desc">выберите из списка</span>
-                </div>
-                <div class="header__field">
-                    <div class="header__field-top">
-                        <span>Дата похода</span>
-                        <img src="/images/calendar-icon.svg" alt="иконка мини-календарь">
-                    </div>
-                    <span class="header__field-desc">укажите дату</span>
-                </div>
-                <div class="header__field">
-                    <div class="header__field-top">
-                        <span>Участники</span>
-                        <img src="/images/arrow-icon.svg" alt="иконка стрелка">
-                    </div>
-                    <span class="header__field-desc">выберите из списка</span>
-                </div>
-                <div class="header__bottom-btn">
-                    <button class="header__bottom_btn-text">Найти программу</button>
-                </div>
-            </div>
+} @else {
+    <header class="header">
+  <div class="header__top-wrapper">
+    <div class="container header__container">
+      <div class="header__top">
+        <a href="#" class="header__logo">
+          <img src="/images/logo-icon.svg" alt="РумТибет" class="header__logo-img">
+          <span class="header__company-name">{{ companyName }}</span>
+        </a>
+        <nav class="header__nav">
+          <a href="#" class="header__nav-link header__nav-link--active">Главная</a>
+          <a href="#" class="header__nav-link" id="about-guide">Про гида</a>
+          <a href="#" class="header__nav-link" id="tour-program">Программа тура</a>
+          <a href="#" class="header__nav-link" id="price">Стоимость</a>
+          <a href="#" class="header__nav-link" id="blog">Блог</a>
+          <a href="#" class="header__nav-link" id="contacts">Контакты</a>
+        </nav>
+        <button class="header__btn" id="btn-consultation">
+          Консультация
+        </button>
+      </div>
+      <div class="header__date-counter">
+        @if (currentHeaderWidget === 'date') {
+        <div class="header__date">
+          <span>{{ currentDate.toLocaleString() }}</span>
         </div>
+        <button 
+        class="header__toggle-btn" 
+        id="show-counter-btn" 
+        (click)="setHeaderWidget('counter')">
+          Показать кликер
+        </button>
+        }
+        @if (currentHeaderWidget === 'counter') {
+        <div class="header__counter">
+          <button id="decrement-btn" (click)="decrementCount()" class="counter-btn">-</button>
+          <span>{{ count }}</span>
+          <button id="increment-btn" (click)="incrementCount()" class="counter-btn">+</button>
+        </div>
+        <button 
+        class="header__toggle-btn" 
+        id="show-date-btn" 
+        (click)="setHeaderWidget('date')">
+          Показать дату
+        </button>
+        }
+      </div>
     </div>
+  </div>
+  <div class="container header__container header__container--bottom">
+    <div class="header__bottom">
+      <h1 class="header__title">
+        Насладись прогулкой в горах<br>
+        с командой единомышленников
+      </h1>
+      <div class="header__form">
+        <div class="header__field">
+          <div class="header__field-top">
+            <select class="header__select" id="tour-city-select" [(ngModel)]="city" name="city">
+              <option value="" disabled selected hidden>Локация для тура</option>
+              <option value="baku">Баку</option>
+              <option value="dubai">Дубай</option>
+              <option value="altay">Алтай</option>
+              <option value="bodrum">Бодрум</option>
+            </select>
+          </div>
+          <span class="header__field-desc">выберите из списка</span>
+        </div>
+        <div class="header__field">
+          <div class="header__field-top">
+            <input class="header__input" type="date" [(ngModel)]="date" name="date">
+          </div>
+          <span class="header__field-desc">укажите дату</span>
+        </div>
+        <div class="header__field">
+          <div class="header__field-top">
+            <select class="header__select" id="tour-participants-select" [(ngModel)]="participants" name="participants">
+              <option value="" disabled selected hidden>Участники</option>
+              <option value="1">1 человек</option>
+              <option value="2">2 человека</option>
+              <option value="3">3 человека</option>
+              <option value="4">4 человека</option>
+            </select>
+          </div>
+          <span class="header__field-desc">выберите из списка</span>
+        </div>
+        <div class="header__bottom-btn">
+          <button
+            class="header__bottom_btn-text" 
+            id="search-program-btn"
+            [disabled]="!city || !date || !participants"
+          >
+            Найти программу
+          </button>
+        </div>
+      </div>
+      <div class="header__live-input">
+        <div class="live-input-wrapper">
+          <input
+            class="live-input"
+            id="live-input"
+            type="text"
+            [(ngModel)]="liveInputValue"
+            maxlength="20"
+            placeholder="Введите текст"
+          >
+          <img
+            src="/images/arrow-icon.svg"
+            alt="иконка стрелка"
+            class="live-input-icon"
+          >
+        </div>
+        <span class="live-input-text">
+          {{ liveInputValue }}
+        </span>
+      </div>
+    </div>
+  </div>
 </header>
+<main class="main">
+  <section class="program__tour" id="tour-program">
+    <div class="container program__tour-container">
+      <div class="program__tour-video">
+        <div class="program__tour-video-bg"></div>
+        <div class="program__tour-video-overlay">
+          <div class="program__tour-video-wrapper">
+            <button 
+            class="program__tour-play" 
+            id="play-tour-program"></button>
+          </div>
+        </div>
+      </div>
+      <div class="program__tour-content">
+        <span class="program__tour-about">о нашем походе</span>
+        <h2 class="program__tour-title">
+          Исследуйте все горные массивы мира вместе с нами
+        </h2>
+        <p class="program__tour-story">
+          Его корни уходят в один фрагмент классической латыни 45 года н.э.,
+          то есть более двух тысячелетий назад. Ричард МакКлинток, профессор
+          латыни из колледжа Hampden-Sydney, штат Вирджиния, взял одно из
+          самых странных слов в Lorem Ipsum, "consectetur", и занялся его
+          поисками в классической латинской литературе.
+        </p>
+        <button class="program__tour-btn" id="btn-tour-program">
+          Программа тура
+        </button>
+      </div>
+    </div>
+  </section>
+  <section class="offers" id="offers">
+    <div class="offers__container">
+      <div class="offers__content">
+        <p class="offers__label">
+          наше предложение
+        </p>
+        <h2 class="offers__title">
+          Лучшие программы для тебя
+        </h2>
+        <p class="offers__description">
+          Его корни уходят в один фрагмент классической латыни 45 года н.э.,
+          то есть более двух тысячелетий назад. Ричард МакКлинток,
+          профессор латыни из колледжа.
+        </p>
+        <ul class="offers__features">
+          @for (offer of offers; track offer.id) {
+            <li class="offers__feature">
+              <div class="offers__icon">
+                <img
+                  [src]="'/images/' + offer.iconName + '.svg'"
+                  [alt]="offer.iconName"
+                >
+              </div>
+              <div class="offers__text">
+                <h3 class="offers__feature-title">
+                  {{ offer.title }}
+                </h3>
+                <p class="offers__feature-desc">
+                  {{ offer.desc }}
+                </p>
+              </div>
+            </li>
+          } @empty {
+            <p>Нет доступных предложений</p>
+          }
+        </ul>
+        <button class="offers__btn" id="btn-offers">
+          Стоимость программ
+        </button>
+      </div>
+      <div class="offers__gallery">
+        <img src="/images/hand-coffee.png" alt="coffee-in-hand">
+        <img src="/images/man-mountain.png" alt="man-and-mountain">
+        <img src="/images/showmobile-mountain.png" alt="showmobile">
+        <img src="/images/creek-mountain.png" alt="creek-in-mountain">
+      </div>
+    </div>
+  </section>
+</main>
+}
