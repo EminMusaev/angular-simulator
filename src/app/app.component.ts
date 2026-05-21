@@ -6,12 +6,14 @@ import { CommonModule } from '@angular/common';
 import { Collection, nameCollection, numberCollection } from './collection';
 import { MessageType } from '../enums/Message-type';
 import { MessageService } from './services/message.service';
-import { StorageService } from './services/storage.service';
+import { LocalStorageService } from './services/local-storage.service';
+import { IDestinationCard } from '../interfaces/IDestinationCard';
+import { IBlogCard } from '../interfaces/IBlogCard';
 
 @Component({
   selector: 'app-root',
   imports: [FormsModule, CommonModule],
-  templateUrl: './app.component.html',
+  templateUrl:  './app.component.html',
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
@@ -19,7 +21,7 @@ export class AppComponent {
   readonly companyName: string = 'Румтибет';
 
   messageService: MessageService = inject(MessageService);
-  storageService: StorageService = inject(StorageService);
+  storageService: LocalStorageService = inject(LocalStorageService);
   messageType: typeof MessageType = MessageType;
 
   city!: string;
@@ -55,7 +57,7 @@ export class AppComponent {
     }
   ];
 
-  destinationPrice = [
+  destinationCards: IDestinationCard [] = [
     {
       id: 1,
       title: 'Озеро возле гор',
@@ -82,12 +84,12 @@ export class AppComponent {
     },
   ];
 
-  blogCards = [
+  blogCards: IBlogCard [] = [
     {
       id: 1,
       title: 'Красивая Италия, какая она в реальности?',
       description: 'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации.',
-      date: '01/04/2023',
+      date: '01/04/2023' ,
       image: 'houses-the-cliff',
       linkText: '#',
     },
@@ -160,7 +162,7 @@ export class AppComponent {
   }
 
   updateVisitsCount(): void {
-    const storedValue = this.storageService.getValue<number>('visits-count') || 0;
+    const storedValue: number = this.storageService.getValue<number>('visits-count') ?? 0;
 
     this.storageService.setValue('visits-count', storedValue + 1);
   }

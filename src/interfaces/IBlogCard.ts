@@ -1,8 +1,8 @@
-export interface IBlogCards {
+export interface IBlogCard {
     id: number;
     title: string;
     description: string;
-    date: number;
+    date: string;
     image: string;
-    linl: number;
+    linkText: string;
 }

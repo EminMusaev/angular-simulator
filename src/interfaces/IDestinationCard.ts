@@ -1,4 +1,4 @@
-export interface IDestinationPrice {
+export interface IDestinationCard {
     id: number;
     title: string;
     subtitle: string;

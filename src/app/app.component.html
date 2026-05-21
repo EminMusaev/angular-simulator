@@ -1,9 +1,9 @@
-@if (isLoading) {
+<!-- @if (isLoading) {
     <div class="loading">
         Загрузка страницы...
         <img class="loader-icon" src="/images/loader-icon.svg" alt="loader-icon">
     </div>
-} @else {
+} @else { -->
     <header class="header">
   <div class="header__top-wrapper">
     <div class="container header__container">
@@ -208,12 +208,13 @@
         <h2 class="destination__title">Популярные направления</h2>
       </div>
         <div class="destination__list">
-          @for (destination of destinationPrice; track destination.id) {
+          @for (destination of destinationCards; track destination.id) {
           <div class="destination-card">
-              <img class="destination-card__image"
+              <img 
+              class="destination-card__image"
               [src]="'/images/' + destination.image + '.png'"
-              [alt]="destination.title">
-              
+              [alt]="destination.title"
+              >
               <div class="destination-card__rating">
                 <span class="destination-card__star">★</span>
                 <span class="destination-card__score">{{ destination.rating }}</span>
@@ -242,7 +243,7 @@
         <h2 class="articles__title">Блог о путешествиях</h2>
       </div>
       <div class="articles__list">
-        @for (blog of blogCards; track blog.id) {
+        @for (blog of blogCards ; track blog.id) {
         <div class="articles-card">
           <img class="articles-card__img" [src]="'/images/' + blog.image + '.png'" [alt]="blog.title">
           <div class="articles-card__content">
@@ -263,7 +264,8 @@
       <button 
       id="articles-btn" 
       class="articles__btn" 
-      (click)="messageService.addMessage(messageType. ERROR, 'Нет данных')">
+      (click)="messageService.addMessage(messageType. ERROR, 'Нет данных')"
+      >
         Другие материалы
       </button> 
     </div>
@@ -271,8 +273,10 @@
 </main>
 <div class="toast">
   @for (message of messageService.messageList; track $index) {
-  <ng-container [ngTemplateOutlet]="toastMessage" [ngTemplateOutletContext]="{ message: message }">
-  </ng-container>
+    <ng-container 
+      [ngTemplateOutlet]="toastMessage" 
+      [ngTemplateOutletContext]="{ message: message }">
+    </ng-container>
   }
 </div>
 
@@ -290,10 +294,10 @@
           </span>
         </div>
       </div>
-      <button class="toast__close" [id]="'close-' + toast.text" (click)="messageService.closeMessage(toast)">
+      <button class="toast__close" [id]="'close-toast' + toast.id" (click)="messageService.closeMessage(toast)">
         <img src="/images/close-message-icon.svg" alt="close-icon" width="20" height="20">
       </button>
     </div>
   </div>
 </ng-template>
-}
+<!-- } -->
