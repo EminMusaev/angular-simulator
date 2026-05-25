@@ -1,9 +1,9 @@
-<!-- @if (isLoading) {
+@if (isLoading) {
     <div class="loading">
         Загрузка страницы...
         <img class="loader-icon" src="/images/loader-icon.svg" alt="loader-icon">
     </div>
-} @else { -->
+} @else {
     <header class="header">
   <div class="header__top-wrapper">
     <div class="container header__container">
@@ -213,8 +213,7 @@
               <img 
               class="destination-card__image"
               [src]="'/images/' + destination.image + '.png'"
-              [alt]="destination.title"
-              >
+              [alt]="destination.title">
               <div class="destination-card__rating">
                 <span class="destination-card__star">★</span>
                 <span class="destination-card__score">{{ destination.rating }}</span>
@@ -264,8 +263,7 @@
       <button 
       id="articles-btn" 
       class="articles__btn" 
-      (click)="messageService.addMessage(messageType. ERROR, 'Нет данных')"
-      >
+      (click)="messageService.addMessage(messageType. ERROR, 'Нет данных')">
         Другие материалы
       </button> 
     </div>
@@ -294,10 +292,10 @@
           </span>
         </div>
       </div>
-      <button class="toast__close" [id]="'close-toast' + toast.id" (click)="messageService.closeMessage(toast)">
-        <img src="/images/close-message-icon.svg" alt="close-icon" width="20" height="20">
+      <button id="close-toast" class="toast__close" (click)="messageService.closeMessage(toast)">
+      <img src="/images/close-message-icon.svg" alt="close-icon" width="20" height="20">
       </button>
     </div>
   </div>
 </ng-template>
-<!-- } -->
+}
