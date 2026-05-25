@@ -213,7 +213,8 @@
               <img 
               class="destination-card__image"
               [src]="'/images/' + destination.image + '.png'"
-              [alt]="destination.title">
+              [alt]="destination.title"
+              />
               <div class="destination-card__rating">
                 <span class="destination-card__star">★</span>
                 <span class="destination-card__score">{{ destination.rating }}</span>
@@ -263,7 +264,8 @@
       <button 
       id="articles-btn" 
       class="articles__btn" 
-      (click)="messageService.addMessage(messageType. ERROR, 'Нет данных')">
+      (click)="messageService.addMessage(messageType.ERROR, 'Нет данных')"
+      >
         Другие материалы
       </button> 
     </div>

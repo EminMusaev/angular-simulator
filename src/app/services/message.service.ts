@@ -19,8 +19,8 @@ export class MessageService {
         }, 5000);
     }
     
-    closeMessage(CurrentMessage: IMessage): void {
-        this.messageList = this.messageList.filter((message: IMessage) => message !== CurrentMessage)
+    closeMessage(currentMessage: IMessage): void {
+        this.messageList = this.messageList.filter((message: IMessage) => message !== currentMessage)
     }
 
 }
