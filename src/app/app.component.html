@@ -201,5 +201,103 @@
       </div>
     </div>
   </section>
+  <section class="destination">
+    <div class="destination__container container">
+      <div class="destination__header">
+        <p class="destination__label">по версии отдыхающих</p>
+        <h2 class="destination__title">Популярные направления</h2>
+      </div>
+        <div class="destination__list">
+          @for (destination of destinationCards; track destination.id) {
+          <div class="destination-card">
+              <img 
+                class="destination-card__image"
+                [src]="'/images/' + destination.image + '.png'"
+                [alt]="destination.title"
+              />
+              <div class="destination-card__rating">
+                <span class="destination-card__star">★</span>
+                <span class="destination-card__score">{{ destination.rating }}</span>
+              </div>
+              <div class="destination-card__bottom">
+                <div class="destination-card__info">
+                  <h3 class="destination-card__title">{{ destination.title }}</h3>
+                  <p class="destination-card__desc">{{ destination.subtitle }}</p>
+                </div>
+                <div class="destination-card__price">
+                  {{ destination.price }} $
+                </div>
+            </div>
+          </div>
+          }
+        </div>
+        <div class="destination__btn-wrapper">
+          <button class="destination__btn" id="destination-btn">Рейтинг направлений</button>
+        </div>
+      </div>
+  </section>
+  <section class="articles">
+    <div class="articles__container container">
+      <div class="articles__header">
+        <p class="articles__label">делимся впечатлениями</p>
+        <h2 class="articles__title">Блог о путешествиях</h2>
+      </div>
+      <div class="articles__list">
+        @for (blog of blogCards ; track blog.id) {
+        <div class="articles-card">
+          <img class="articles-card__img" [src]="'/images/' + blog.image + '.png'" [alt]="blog.title">
+          <div class="articles-card__content">
+            <a [href]="blog.linkText" id="blog-title" class="articles-card__title">
+              {{ blog.title }}
+            </a>
+            <p class="articles-card__text">
+              {{ blog.description }}
+            </p>
+            <div class="articles-card__bottom">
+              <span class="articles-card__date">{{ blog.date }}</span>
+              <a [href]="blog.linkText" id="blog-link" class="articles-card__more">читать статью</a>
+            </div>
+          </div>
+        </div>
+        }
+      </div>
+      <button 
+        id="articles-btn" 
+        class="articles__btn" 
+        (click)="messageService.addMessage(messageType.ERROR, 'Нет данных')"
+      >
+        Другие материалы
+      </button> 
+    </div>
+  </section>
 </main>
+<div class="toast">
+  @for (message of messageService.messageList; track $index) {
+    <ng-container 
+      [ngTemplateOutlet]="toastMessage" 
+      [ngTemplateOutletContext]="{ message: message }">
+    </ng-container>
+  }
+</div>
+
+<ng-template #toastMessage let-toast="message">
+  <div class="toast__item">
+    <div class="toast__wrapper">
+      <div class="toast__info">
+        <img src="/images/mail-icon.svg" alt="message-icon" width="40" height="40">
+        <div class="toast__content">
+          <span class="toast__type">
+            {{ toast.type }}
+          </span>
+          <span class="toast__text">
+            {{ toast.text }}
+          </span>
+        </div>
+      </div>
+      <button id="close-toast" class="toast__close" (click)="messageService.closeMessage(toast)">
+      <img src="/images/close-message-icon.svg" alt="close-icon" width="20" height="20">
+      </button>
+    </div>
+  </div>
+</ng-template>
 }

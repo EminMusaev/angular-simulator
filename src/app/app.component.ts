@@ -1,30 +1,39 @@
 import { FormsModule } from '@angular/forms';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import './training';
 import { Color } from '../enums/Color';
 import { CommonModule } from '@angular/common';
 import { Collection, nameCollection, numberCollection } from './collection';
+import { MessageType } from '../enums/Message-type';
+import { MessageService } from './services/message.service';
+import { LocalStorageService } from './services/local-storage.service';
+import { IDestinationCard } from '../interfaces/IDestinationCard';
+import { IBlogCard } from '../interfaces/IBlogCard';
 
 @Component({
   selector: 'app-root',
   imports: [FormsModule, CommonModule],
-  templateUrl: './app.component.html',
+  templateUrl:  './app.component.html',
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
 
-  companyName: string = 'Румтибет';
+  readonly companyName: string = 'Румтибет';
 
-  city: string = '';
-  date: string = '';
-  participants: string = '';
+  messageService: MessageService = inject(MessageService);
+  storageService: LocalStorageService = inject(LocalStorageService);
+  messageType: typeof MessageType = MessageType;
+
+  city!: string;
+  date!: string;
+  participants!: string;
 
   count: number = 0;
 
   currentDate: Date = new Date();
   currentHeaderWidget: 'date' | 'counter' = 'date';
 
-  liveInputValue: string = '';
+  liveInputValue!: string;
   isLoading: boolean = true;
 
   offers = [
@@ -46,6 +55,68 @@ export class AppComponent {
       desc: 'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации.',
       iconName: 'price-icon'
     }
+  ];
+
+  destinationCards: IDestinationCard [] = [
+    {
+      id: 1,
+      title: 'Озеро возле гор',
+      subtitle: 'романтическое приключение',
+      price: 480,
+      image: 'lake-near-mount',
+      rating: 4.9
+    },
+    {
+      id: 2,
+      title: 'Ночь в горах',
+      subtitle: 'в компании друзей',
+      price: 500,
+      image: 'night-in-mount',
+      rating: 4.5
+    },
+    {
+      id: 3,
+      title: 'Йога в горах',
+      subtitle: 'для тех, кто забоится о себе',
+      price: 230,
+      image: 'stretc-in-mount',
+      rating: 5.0
+    },
+  ];
+
+  blogCards: IBlogCard [] = [
+    {
+      id: 1,
+      title: 'Красивая Италия, какая она в реальности?',
+      description: 'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации.',
+      date: '01/04/2023' ,
+      image: 'houses-the-cliff',
+      linkText: '#',
+    },
+    {
+      id: 2,
+      title: 'Долой сомнения! Весь мир открыт для вас!',
+      description: 'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации... независимые способы реализации соответствующих...',
+      date: '01/04/2023',
+      image: 'airplane-the-cloud',
+      linkText: '#',
+    },
+    {
+      id: 3,
+      title: 'Как подготовиться к путешествию в одиночку?',
+      description: 'Для современного мира базовый вектор развития предполагает.',
+      date: '01/04/2023',
+      image: 'narrow-street',
+      linkText: '#',
+    },
+    {
+      id: 4,
+      title: 'Индия ... летим?',
+      description: 'Для современного мира базовый.',
+      date: '01/04/2023',
+      image: 'taj-mahal',
+      linkText: '#',
+    },
   ];
 
   constructor() {
@@ -86,12 +157,14 @@ export class AppComponent {
 
   saveLastVisit(): void {
     const now: string = new Date().toString();
-    localStorage.setItem('last-visit-date', now);
+    
+    this.storageService.setValue('last-visit-date', now);
   }
 
   updateVisitsCount(): void {
-    const storedValue: number = Number(localStorage.getItem('visits-count') || 0);
-    localStorage.setItem('visits-count', String(storedValue + 1));
+    const storedValue: number = this.storageService.getValue<number>('visits-count') ?? 0;
+
+    this.storageService.setValue('visits-count', storedValue + 1);
   }
 
 }
