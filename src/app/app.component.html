@@ -211,9 +211,9 @@
           @for (destination of destinationCards; track destination.id) {
           <div class="destination-card">
               <img 
-              class="destination-card__image"
-              [src]="'/images/' + destination.image + '.png'"
-              [alt]="destination.title"
+                class="destination-card__image"
+                [src]="'/images/' + destination.image + '.png'"
+                [alt]="destination.title"
               />
               <div class="destination-card__rating">
                 <span class="destination-card__star">★</span>
@@ -262,9 +262,9 @@
         }
       </div>
       <button 
-      id="articles-btn" 
-      class="articles__btn" 
-      (click)="messageService.addMessage(messageType.ERROR, 'Нет данных')"
+        id="articles-btn" 
+        class="articles__btn" 
+        (click)="messageService.addMessage(messageType.ERROR, 'Нет данных')"
       >
         Другие материалы
       </button> 
